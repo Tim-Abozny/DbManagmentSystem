@@ -14,6 +14,8 @@
 | address | VARCHAR(50) | not null | адрес пользователя |
 | phone | VARCHAR(13) | not null | номер пользователя |
 | birthday | DATE | not null | дата рождения |
+| storage | fk | not null | внешний ключ на хранилище |
+| user | fk | not null | внешний ключ на пользователя |
 ## Картотека (Cards Storage)
 |имя поля | тип | ограничения | описание |
 |:---:|:---:|:---:|:---:|
