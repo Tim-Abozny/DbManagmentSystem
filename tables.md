@@ -57,7 +57,12 @@ address | VARCHAR(128) | not null | адрес отделения |
 |:---:|:---:|:---:|:---:|
 | id | pk | auto increment; not null; unique | первичный ключ |
 | name | VARCHAR(50) | not null | название роли |
-| permission | VARCHAR(128) | not null | право пользователя |
+## Роли пользователей (Users roles)
+|имя поля | тип | ограничения | описание |
+|:---:|:---:|:---:|:---:|
+| id | pk | auto increment; not null; unique | первичный ключ |
+| userID | fk | not null | ID пользователя |
+| roleID | fk | not null | ID роли |
 ## Логи (Logs)
 |имя поля | тип | ограничения | описание |
 |:---:|:---:|:---:|:---:|
