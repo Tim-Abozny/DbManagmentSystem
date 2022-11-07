@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="asistante_icon-icons.com_55049.png" />
+    <None Remove="google_admin_icon_131692.png" />
+    <None Remove="onlineshopping_118072.png" />
+    <None Remove="support_call_center_help_information_customer_service_icon_140371.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\asistante_icon-icons.com_55049.png" />
+    <Resource Include="Resources\boy_icon-icons.com_55048.png" />
+    <Resource Include="Resources\google_admin_icon_131692.png" />
+    <Resource Include="Resources\onlineshopping_118072.png" />
+    <Resource Include="Resources\support_call_center_help_information_customer_service_icon_140371.png" />
+  </ItemGroup>
+
+</Project>

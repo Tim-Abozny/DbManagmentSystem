@@ -1,0 +1,111 @@
+﻿<Window x:Class="WPFapp1.EntityWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFapp1"
+        mc:Ignorable="d"
+        Title="WHO YOU ARE ?" Height="450" WindowStartupLocation="CenterScreen" WindowState="Normal" WindowStyle="None" ResizeMode="NoResize" Width="800">
+    <Window.Template>
+        <ControlTemplate TargetType="Window">
+            <Border Name="newBorder" CornerRadius="0
+                    " Opacity="0.7" Background="#FF187D7A">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <!--Заголовок-->
+                    <TextBlock Text="{TemplateBinding Title}" FontWeight="Bold" HorizontalAlignment="Center"
+                    MouseLeftButtonDown="TextBlock_MouseLeftButtonDown" Foreground="White" FontFamily="Comic Sans MS" FontSize="16"/>
+                    <!--Основное содержание-->
+                    <Border Grid.Row="1">
+                        <AdornerDecorator>
+                            <ContentPresenter />
+                        </AdornerDecorator>
+                    </Border>
+                    <!--Элемент захвата и изменения размера - работает только для прямоугольных окон-->
+                    <ResizeGrip Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                            Visibility="Collapsed" IsTabStop="False" />
+                </Grid>
+            </Border>
+        </ControlTemplate>
+    </Window.Template>
+    <Grid>
+        <Rectangle HorizontalAlignment="Center" Height="428" VerticalAlignment="Center" Width="800" Stretch="Fill">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF187D7A" Offset="0"/>
+                    <GradientStop Color="#FF187D7A" Offset="0.37"/>
+                    <GradientStop Color="#FF19403C" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Border BorderBrush="Black" BorderThickness="2" HorizontalAlignment="Center" Height="450" Margin="0,-22,0,0" VerticalAlignment="Top" Width="800">
+            <Border.Effect>
+                <BlurEffect Radius="10"></BlurEffect>
+            </Border.Effect>
+        </Border>
+        <Image x:Name="AdminImageButton" HorizontalAlignment="Left" Height="40" Margin="0,388,0,0" VerticalAlignment="Top" Width="40" Source="Resources/google_admin_icon_131692.png" MouseEnter="AdminImageButton_MouseEnter" MouseLeave="AdminImageButton_MouseLeave" MouseLeftButtonDown="AdminImageButton_MouseLeftButtonDown">
+            <Image.Effect>
+                <BlurEffect x:Name="AdminEffects" Radius="10"></BlurEffect>
+            </Image.Effect>
+        </Image>
+        <Rectangle x:Name="ClientImage" HorizontalAlignment="Left" Height="133" VerticalAlignment="Top" Width="128" Stretch="Fill" RadiusX="45" RadiusY="45" Margin="34,153,0,0" MouseEnter="ClientImage_MouseEnter" MouseLeave="ClientImage_MouseLeave" MouseLeftButtonDown="ClientImage_MouseLeftButtonDown">
+            <Rectangle.Effect>
+                <DropShadowEffect x:Name="ClientEffects" ShadowDepth="0" BlurRadius="0"></DropShadowEffect>
+            </Rectangle.Effect>
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="Resources/boy_icon-icons.com_55048.png"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle x:Name="DoctorImage" HorizontalAlignment="Left" Height="133" VerticalAlignment="Top" Width="128" Stretch="Fill" RadiusX="30" RadiusY="30" Margin="226,153,0,0" MouseEnter="DoctorImage_MouseEnter" MouseLeave="DoctorImage_MouseLeave" MouseLeftButtonDown="DoctorImage_MouseLeftButtonDown">
+            <Rectangle.Effect>
+                <DropShadowEffect x:Name="DoctorEffects" ShadowDepth="0" BlurRadius="0"></DropShadowEffect>
+            </Rectangle.Effect>
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="Resources/asistante_icon-icons.com_55049.png"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle x:Name="RegistratorImage" HorizontalAlignment="Left" Height="133" VerticalAlignment="Top" Width="128" Stretch="Fill" RadiusX="30" RadiusY="30" Margin="429,153,0,0" MouseEnter="RegistratorImage_MouseEnter" MouseLeave="RegistratorImage_MouseLeave" MouseLeftButtonDown="RegistratorImage_MouseLeftButtonDown">
+            <Rectangle.Effect>
+                <DropShadowEffect x:Name="RegistratorEffects" ShadowDepth="0" BlurRadius="0"></DropShadowEffect>
+            </Rectangle.Effect>
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="Resources/support_call_center_help_information_customer_service_icon_140371.png"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle x:Name="AccountantImage" HorizontalAlignment="Left" Height="133" VerticalAlignment="Top" Width="128" Stretch="Fill" RadiusX="30" RadiusY="30" Margin="630,153,0,0" MouseEnter="AccountantImage_MouseEnter" MouseLeave="AccountantImage_MouseLeave" MouseLeftButtonDown="AccountantImage_MouseLeftButtonDown">
+            <Rectangle.Effect>
+                <DropShadowEffect x:Name="AccountantEffects" ShadowDepth="0" BlurRadius="0"></DropShadowEffect>
+            </Rectangle.Effect>
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="Resources/onlineshopping_118072.png"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Button x:Name="ExitButton"  Click="CloseApp" Content="exit" Margin="757,397,0,0" VerticalAlignment="Top" FontFamily="Comic Sans MS" FontSize="19" Background="#00DDDDDD" FontWeight="Bold" BorderBrush="#00707070" Height="31" MouseEnter="Button_MouseEnter" MouseLeave="ExitButton_MouseLeave" VerticalContentAlignment="Top">
+            <Button.Effect>
+                <BlurEffect x:Name="exitButtonBlur" Radius="10"></BlurEffect>
+            </Button.Effect>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="10"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                Background="{TemplateBinding Background}"
+                Height="{TemplateBinding Height}"
+                Width="{TemplateBinding Width}" >
+                        <ContentControl Margin="{TemplateBinding Padding}"
+                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                        Content="{TemplateBinding Content}" />
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Foreground>
+                <SolidColorBrush x:Name="myColor" Color="White"/>
+            </Button.Foreground>
+        </Button>
+    </Grid>
+</Window>
