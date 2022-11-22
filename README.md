@@ -1,3 +1,3 @@
 # Частная клиника
  Обозный Артём Дмитриевич | 053504
-![db_scheme](https://user-images.githubusercontent.com/72353844/200307985-5f9ab6f9-be5f-47c9-93d2-1ef83384b9f7.png)
+![db_scheme](https://user-images.githubusercontent.com/72353844/203332200-83b752ee-c13b-45fc-8e54-0f3f7a492167.png)
