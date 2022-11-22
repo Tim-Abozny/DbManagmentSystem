@@ -68,6 +68,12 @@ namespace WPFapp1
             EntityWindow entityWindow = new EntityWindow();
             this.Hide();
             entityWindow.Show();
+
+            EntityWindow.ClientChoosen = 0;
+            EntityWindow.DoctorChoosen = 0;
+            EntityWindow.RegistratorChoosen = 0;
+            EntityWindow.AccountantChoosen = 0;
+            EntityWindow.AdminChoosen = 0;
         }
 
         private void Button_MouseEnter(object sender, MouseEventArgs e)
@@ -80,12 +86,6 @@ namespace WPFapp1
             ExitButton.Foreground = new SolidColorBrush(myColor.Color);
             ExitButton.Background = new SolidColorBrush();
             exitButtonBlur.Radius = 10;
-
-            EntityWindow.ClientChoosen = 0;
-            EntityWindow.DoctorChoosen = 0;
-            EntityWindow.RegistratorChoosen = 0;
-            EntityWindow.AccountantChoosen = 0;
-            EntityWindow.AdminChoosen = 0;
         }
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -124,5 +124,22 @@ namespace WPFapp1
             ConnectButton.FontSize = 12;
         }
         #endregion
+
+        private void registerShadow_MouseEnter(object sender, MouseEventArgs e)
+        {
+            shadowEffect.ShadowDepth = 2;
+        }
+
+        private void registerShadow_MouseLeave(object sender, MouseEventArgs e)
+        {
+            shadowEffect.ShadowDepth = 0;
+        }
+
+        private void registerShadow_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            RegistrationUserWindow registrationUser = new RegistrationUserWindow();
+            registrationUser.Show();
+            this.Hide();
+        }
     }
 }

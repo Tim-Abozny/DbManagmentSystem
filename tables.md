@@ -52,6 +52,12 @@
 | id | pk | auto increment; not null; unique | первичный ключ |
 | name | VARCHAR(128) | not null | название отделения |
 address | VARCHAR(128) | not null | адрес отделения |
+## Оборудование отделения (DepartmentEquipments)
+|имя поля | тип | ограничения | описание |
+|:---:|:---:|:---:|:---:|
+| id | pk | auto increment; not null; unique | первичный ключ |
+| equipmentID | fk | not null | ID оборудования |
+| departmentID | fk | not null | ID отделения |
 ## Роли (Roles)
 |имя поля | тип | ограничения | описание |
 |:---:|:---:|:---:|:---:|
