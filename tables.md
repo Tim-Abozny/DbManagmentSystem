@@ -30,6 +30,7 @@
 | cost | DECIMAL | not null | стоимость услуги |
 | doctor | fk | not null | внешний ключ на врача |
 | user | fk | not null | внешний ключ на клиента |
+| statusCode | VARCHAR(20) | not null | статус услуги |
 ## Оборудование (Equipment)
 |имя поля | тип | ограничения | описание |
 |:---:|:---:|:---:|:---:|
