@@ -21,7 +21,7 @@ order by Services.sCost
 
 select Doctors.dName as Humans
 from Doctors
-union all
+union
 select ClientCards.cName 
 from ClientCards
 join Services on Services.userID = ClientCards.UserID
