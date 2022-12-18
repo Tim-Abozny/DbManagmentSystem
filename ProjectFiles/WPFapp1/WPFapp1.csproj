@@ -9,8 +9,14 @@
 
   <ItemGroup>
     <None Remove="asistante_icon-icons.com_55049.png" />
+    <None Remove="card.png" />
+    <None Remove="covid.png" />
     <None Remove="google_admin_icon_131692.png" />
+    <None Remove="idea.png" />
+    <None Remove="listReg.png" />
     <None Remove="onlineshopping_118072.png" />
+    <None Remove="report.png" />
+    <None Remove="servList.png" />
     <None Remove="support_call_center_help_information_customer_service_icon_140371.png" />
   </ItemGroup>
 
@@ -19,11 +25,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="card.png" />
+    <Resource Include="covid.png" />
+    <Resource Include="idea.png" />
+    <Resource Include="listReg.png" />
+    <Resource Include="report.png" />
     <Resource Include="Resources\asistante_icon-icons.com_55049.png" />
     <Resource Include="Resources\boy_icon-icons.com_55048.png" />
     <Resource Include="Resources\google_admin_icon_131692.png" />
     <Resource Include="Resources\onlineshopping_118072.png" />
     <Resource Include="Resources\support_call_center_help_information_customer_service_icon_140371.png" />
+    <Resource Include="servList.png" />
   </ItemGroup>
 
 </Project>

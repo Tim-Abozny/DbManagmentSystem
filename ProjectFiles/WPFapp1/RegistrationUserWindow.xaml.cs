@@ -1,10 +1,11 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Configuration;
 using System.Data.SqlClient;
+using System.Net;
+using System.Xml.Linq;
+using System.Configuration;
 using System.Data;
-using WPFapp1.EntityWindows;
 
 namespace WPFapp1
 {
@@ -20,9 +21,9 @@ namespace WPFapp1
         }
         private void CloseApp(object sender, RoutedEventArgs e)
         {
-            LoginWindow loginWindow = new LoginWindow();
+            ClientWindow clientWindow = new ClientWindow();
             this.Hide();
-            loginWindow.Show();
+            clientWindow.Show();
         }
 
         private void Button_MouseEnter(object sender, MouseEventArgs e)
@@ -42,47 +43,24 @@ namespace WPFapp1
         }
         private void SetConnection(object sender, RoutedEventArgs e)
         {
-            //sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbManagSys"].ConnectionString);
-            //sqlConnection.Open();
+            sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbManagSys"].ConnectionString);
+            sqlConnection.Open();
+            SqlDataAdapter sda = new SqlDataAdapter("DECLARE @name varchar(128), @address varchar(50), @phone varchar(13), @birthday date, @userID INT, @storageID INT " +
+            $"SET @name = '{FullName.Text}' " +
+            $"SET @address = '{Address.Text}' " +
+            $"SET @phone = '{Phone.Text}' " +
+            $"SET @birthday = '{Birthday.Text}' " +
+            $"SET @userID = {Statics.PersonID} " +
+            $"SET @storageID = (select CardsStorage.ID from CardsStorage where CardsStorage.Section = 'firstSection') " +
+            $"EXEC NewCard @name, @address, @phone, @birthday, @userID, @storageID", sqlConnection);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            sqlConnection.Close();
 
-            //if (EntityWindow.ClientChoosen == 1)
-            //{
-            //    SqlDataAdapter sda = new SqlDataAdapter("select count(*) from UserAccounts where uEmail = '" + login.Text + "' and uPassword = '" + password.Password + "' ", sqlConnection);
-            //    DataTable dt = new DataTable();
-            //    sda.Fill(dt);
-            //    if (dt.Rows[0][0].ToString() == "1")
-            //    {
-            //        ClientWindow clientWindow = new ClientWindow();
-            //        clientWindow.Show();
-            //        this.Hide();
-
-            //        sqlConnection.Close();
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("WRONG ACCOUNT NUMBER OR PIN CODE");
-            //        sqlConnection.Close();
-            //    }
-            //}
-            //else if (EntityWindow.DoctorChoosen == 1)
-            //{
-
-            //}
-            //else if (EntityWindow.RegistratorChoosen == 1)
-            //{
-
-            //}
-            //else if (EntityWindow.AccountantChoosen == 1)
-            //{
-
-            //}
-            //else if (EntityWindow.AdminChoosen == 1)
-            //{
-
-            //}
-
-            //if (sqlConnection.State == ConnectionState.Open)
-            //    sqlConnection.Close();
+            MessageBox.Show($"Operation successful.\nCongratulations!");
+            ClientWindow clientWindow = new ClientWindow();
+            this.Hide();
+            clientWindow.Show();
         }
         private void Button_MouseEnter_1(object sender, MouseEventArgs e)
         {

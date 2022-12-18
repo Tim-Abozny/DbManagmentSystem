@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace WPFapp1.EntityWindows
+namespace WPFapp1
 {
     /// <summary>
-    /// Interaction logic for ClientWindow.xaml
+    /// Interaction logic for RegistratorWindow.xaml
     /// </summary>
-    public partial class ClientWindow : Window
+    public partial class RegistratorWindow : Window
     {
-        public ClientWindow()
+        public RegistratorWindow()
         {
             InitializeComponent();
         }
@@ -37,18 +37,27 @@ namespace WPFapp1.EntityWindows
         {
             exitButtonBlur.Radius = 0;
         }
-
         private void ExitButton_MouseLeave(object sender, MouseEventArgs e)
         {
             ExitButton.Foreground = new SolidColorBrush(myColor.Color);
             ExitButton.Background = new SolidColorBrush();
             exitButtonBlur.Radius = 10;
+        }
+        private void DoctorImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            RegServWindow regServ = new RegServWindow();
+            this.Hide();
+            regServ.Show();
 
-            EntityWindow.ClientChoosen = 0;
-            EntityWindow.DoctorChoosen = 0;
-            EntityWindow.RegistratorChoosen = 0;
-            EntityWindow.AccountantChoosen = 0;
-            EntityWindow.AdminChoosen = 0;
+        }
+        private void DoctorImage_MouseEnter(object sender, MouseEventArgs e)
+        {
+            DoctorEffects.BlurRadius = 50;
+        }
+
+        private void DoctorImage_MouseLeave(object sender, MouseEventArgs e)
+        {
+            DoctorEffects.BlurRadius = 0;
         }
     }
 }

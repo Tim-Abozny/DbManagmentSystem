@@ -2,6 +2,17 @@
 
 
 go
+create or alter TRIGGER Services_Update
+on Services
+after UPDATE
+as
+BEGIN
+	insert into Logs (userID,LogType, Representation)
+	select userID, 'UPDATE_SERVICE', sCost
+	from inserted
+END
+
+go
 create or alter TRIGGER Services_INSERT
 on Services
 after INSERT
@@ -66,4 +77,15 @@ BEGIN
 	insert into Logs (userID,LogType, Representation)
 	select ID, 'REMOVE_DOCTOR', concat(dName, '.', dPost, '.')
 	from deleted
+END
+
+go
+create or alter TRIGGER UserAccounts_INSERT
+on UserAccounts
+after INSERT
+as
+BEGIN
+	insert into UsersRoles (userID, roleID)
+	select ID, (select Roles.ID from Roles where Roles.rName = 'visitor')
+	from inserted
 END

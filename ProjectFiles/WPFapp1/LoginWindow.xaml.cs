@@ -4,37 +4,72 @@ using System.Windows.Media;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Data;
-using WPFapp1.EntityWindows;
-
 namespace WPFapp1
 {
+    public static class Statics
+    {
+        public static int PersonID = 0;
+    }
     /// <summary>
     /// Interaction logic for LoginWindow.xaml
     /// </summary>
     public partial class LoginWindow : Window
     {
         private SqlConnection? sqlConnection = null;
-        public LoginWindow()
-        {
-            InitializeComponent();
-        }
-        private void SetConnection(object sender, RoutedEventArgs e)
-        {
-            sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbManagSys"].ConnectionString);
-            sqlConnection.Open();
 
-            if (EntityWindow.ClientChoosen == 1)
+        private void CheckAccount(int roleID)
+        {            
+            try
             {
-                SqlDataAdapter sda = new SqlDataAdapter("select count(*) from UserAccounts where uEmail = '" + login.Text + "' and uPassword = '" + password.Password + "' ", sqlConnection);
+                sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbManagSys"].ConnectionString);
+                sqlConnection.Open();
+            
+                SqlDataAdapter sda = new SqlDataAdapter("DECLARE @email varchar(50), @password varchar (255), @roleID INT " +
+                    $"SET @email = '{login.Text}' " +
+                    $"SET @password = '{password.Password}' " +
+                    $"SET @roleID = '{roleID}' " +
+                    "EXEC CheckUserData @email, @password, @roleID", sqlConnection);
                 DataTable dt = new DataTable();
                 sda.Fill(dt);
                 if (dt.Rows[0][0].ToString() == "1")
                 {
-                    ClientWindow clientWindow = new ClientWindow();
-                    clientWindow.Show();
-                    this.Hide();
-
+                    #region code
+                    sqlConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["DbManagSys"].ConnectionString);
+                    sqlConnection.Open();
+                    string query = "select UserAccounts.ID from UserAccounts where uEmail = " +
+                    $"'{login.Text}' and uPassword = " +
+                    $"'{password.Password}' intersect select UsersRoles.userID from UsersRoles where UsersRoles.roleID = '{roleID}'";
+                    SqlCommand command = new SqlCommand(query, sqlConnection);
+                    Statics.PersonID = (int)(command.ExecuteScalar());
                     sqlConnection.Close();
+                    #endregion
+
+                    if (EntityWindow.ClientChoosen == 1)
+                    {
+                        ClientWindow clientWindow = new ClientWindow();
+                        this.Hide();
+                        clientWindow.Show();
+                    }
+                    else if (EntityWindow.DoctorChoosen == 1)
+                    {
+                        DoctorWindow doctorWindow = new DoctorWindow();
+                        this.Hide();
+                        doctorWindow.Show();
+                    }
+                    else if (EntityWindow.RegistratorChoosen == 1)
+                    {
+                        RegistratorWindow registratorWindow = new RegistratorWindow();
+                        this.Hide();
+                        registratorWindow.Show();
+                    }
+                    else if (EntityWindow.AccountantChoosen == 1)
+                    {
+                        AccountantWindow accountantWindow = new AccountantWindow();
+                        this.Hide();
+                        accountantWindow.Show();
+                    }
+
+                    sqlConnection.Close();    
                 }
                 else
                 {
@@ -42,38 +77,56 @@ namespace WPFapp1
                     sqlConnection.Close();
                 }
             }
-            else if (EntityWindow.DoctorChoosen == 1)
+            catch (System.Exception)
             {
+                if (sqlConnection.State == ConnectionState.Open)
+                    sqlConnection.Close();
+            }
 
+        }
+        
+        public LoginWindow()
+        {
+            InitializeComponent();
+        }
+        private void SetConnection(object sender, RoutedEventArgs e)
+        {
+            
+
+            if (EntityWindow.ClientChoosen == 1)
+            {
+                CheckAccount(1);
+            }
+            else if (EntityWindow.DoctorChoosen == 1) 
+            {
+                CheckAccount(2);
             }
             else if (EntityWindow.RegistratorChoosen == 1)
             {
-
+                CheckAccount(3);
             }
             else if (EntityWindow.AccountantChoosen == 1)
             {
-
+                CheckAccount(4);
             }
             else if (EntityWindow.AdminChoosen == 1)
             {
-
+                CheckAccount(5);
             }
-
-            if (sqlConnection.State == ConnectionState.Open)
-                sqlConnection.Close();
         }
         #region DesignFunctions
         private void CloseApp(object sender, RoutedEventArgs e)
         {
             EntityWindow entityWindow = new EntityWindow();
-            this.Hide();
-            entityWindow.Show();
 
             EntityWindow.ClientChoosen = 0;
             EntityWindow.DoctorChoosen = 0;
             EntityWindow.RegistratorChoosen = 0;
             EntityWindow.AccountantChoosen = 0;
             EntityWindow.AdminChoosen = 0;
+            
+            this.Hide();
+            entityWindow.Show();           
         }
 
         private void Button_MouseEnter(object sender, MouseEventArgs e)
@@ -112,7 +165,6 @@ namespace WPFapp1
             ConnectButton.FontSize = 12;
             ConnectButton.FontSize = 13;
         }
-
         private void Button_MouseLeave(object sender, MouseEventArgs e)
         {
             for (int i = 20; i > 0; i--)
@@ -123,7 +175,6 @@ namespace WPFapp1
             ConnectButton.FontSize = 13;
             ConnectButton.FontSize = 12;
         }
-        #endregion
 
         private void registerShadow_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -137,9 +188,10 @@ namespace WPFapp1
 
         private void registerShadow_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            RegistrationUserWindow registrationUser = new RegistrationUserWindow();
+            RegisterUserAccWindow registrationUser = new RegisterUserAccWindow();
             registrationUser.Show();
             this.Hide();
         }
+        #endregion
     }
 }

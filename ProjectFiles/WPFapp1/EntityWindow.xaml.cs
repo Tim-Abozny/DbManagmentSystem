@@ -112,21 +112,25 @@ namespace WPFapp1
         private void DoctorImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             SwitchToLoginWindow();
+            DoctorChoosen = 1;
         }
 
         private void RegistratorImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             SwitchToLoginWindow();
+            RegistratorChoosen = 1;
         }
 
         private void AccountantImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             SwitchToLoginWindow();
+            AccountantChoosen = 1;
         }
 
         private void AdminImageButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             SwitchToLoginWindow();
+            AdminChoosen = 1;
         }
     }
 }
